@@ -44,8 +44,8 @@ ENGINE.Player.prototype = {
   collidable: true,
 
   sprites: [
-    [13, 65, 20, 16],
-    [36, 65, 20, 16],
+    [13, 65, 20, 16], // Team 0
+    [36, 65, 20, 16], // Team 1
   ],
 
   collision: function(object) {
