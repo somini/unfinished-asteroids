@@ -32,10 +32,18 @@ ENGINE.Asteroid.prototype = {
     this.hp -= data.damage;
 
     if (this.hp <= 0) {
+      // Asteroid destroyed
+
+      app.playSound("asteroid-crush");
 
       if (this.splits) this.split();
 
       this.collection.remove(this);
+    }
+    else {
+      // Asteroid just hit
+
+      app.playSound("asteroid-hit");
     }
 
   },
