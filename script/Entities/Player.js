@@ -23,7 +23,11 @@ ENGINE.Player = function(args) {
     maxCooldown: 0.3,
 
     hp: 10,
-    maxHp: 10
+    maxHp: 10,
+
+    /* scoring */
+
+    score: 0
 
   }, args);
 
@@ -57,7 +61,8 @@ ENGINE.Player.prototype = {
       });
 
       object.hit({
-        damage: 2
+        damage: 2,
+        team: this.team
       });
 
       /* bounce in the opposite direction */
@@ -81,6 +86,8 @@ ENGINE.Player.prototype = {
     this.hp = Math.max(0, this.hp - data.damage);
 
     if (this.hp <= 0) {
+
+      app.game.changeScore("player-death", this.team);
 
       this.collection.remove(this);
     }

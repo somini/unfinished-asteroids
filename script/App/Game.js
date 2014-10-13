@@ -7,6 +7,12 @@ app.game = {
     this.collisions.callback = this.collisionHandler.bind(this);
 
     this.players = [];
+    this.scores = {};
+    this.rewards = {
+      "player-kill-asteroid": +1,
+      "player-death": -10,
+    },
+
 
     this.addPlayer(app.center.x, app.center.y, 0);
 
@@ -46,6 +52,8 @@ app.game = {
 
     this.players.push(player);
 
+    this.scores[team] = 0;
+
     return player;
   },
 
@@ -53,6 +61,18 @@ app.game = {
 
     entity.x = Utils.wrap(entity.x, -entity.radius, app.width + entity.radius);
     entity.y = Utils.wrap(entity.y, -entity.radius, app.height + entity.radius);
+
+  },
+
+  getScore: function(team) {
+
+    return this.scores[team];
+
+  },
+
+  changeScore: function(action, team) {
+
+    this.scores[team] += this.rewards[action];
 
   },
 

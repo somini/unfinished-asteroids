@@ -34,7 +34,7 @@ ENGINE.Asteroid.prototype = {
     if (this.hp <= 0) {
       // Asteroid destroyed
 
-      app.playSound("asteroid-crush");
+      this.destroy(data.team);
 
       if (this.splits) this.split();
 
@@ -75,6 +75,16 @@ ENGINE.Asteroid.prototype = {
     /* wrap */
 
     app.game.wrap(this);
+  },
+
+  destroy: function(team) {
+
+    this.destroyed = true;
+
+    app.game.changeScore("player-kill-asteroid", team);
+
+    app.playSound("asteroid-crush");
+
   },
 
   render: function() {
